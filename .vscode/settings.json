@@ -1,0 +1,7 @@
+{
+  "deno.enablePaths": [
+    "./"
+  ],
+  "editor.inlayHints.enabled": "off",
+  "C_Cpp.codeAnalysis.clangTidy.path": "D:\\__compilers\\llvm-mos\\bin\\clang-tidy.exe"
+}
