@@ -1,15 +1,13 @@
 import { Hono } from 'hono'
 // import { logger } from 'hono/logger'
 // import { poweredBy } from 'hono/powered-by'
-import { staticroutes } from "./static/routes.ts";
-import { approutes } from "./app/routes.ts";
+import { ssrouter } from "./router.ts";
 const app = new Hono()
 
-staticroutes(app);
-approutes(app);
+ssrouter(app);
 
 app.get('/', (c) => {
-  return c.redirect('/index.html');
+  return c.redirect('/app/index');
 });
 
 Deno.serve(app.fetch)
