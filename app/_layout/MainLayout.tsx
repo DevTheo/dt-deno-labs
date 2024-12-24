@@ -1,4 +1,5 @@
 import { FC } from "hono/jsx";
+import { aocdays } from "../routes.ts";
 
 export type LayoutProps = {
     // deno-lint-ignore no-explicit-any
@@ -81,17 +82,8 @@ export const MainLayout:FC = (props) => {
                             <li class={indexClass}><a href="/app/index">Home</a></li>
                             <li class={`has-children${aocClass}`}><a href="#0">AoC 24</a>
                                 <ul>
-                                    <li><a href="#" hx-get="/aoc24/day01" hx-target="#app-content">Day 01</a></li>
-                                    <li><a href="#">Day 02</a></li>
-                                    <li><a href="#">Day 03</a></li>
-                                    <li><a href="#">Day 04</a></li>
-                                    <li><a href="#">Day 05</a></li>
-                                    <li><a href="#">Day 06</a></li>
-                                    <li><a href="#">Day 07</a></li>
-                                    <li><a href="#">Day 08</a></li>
-                                    <li><a href="#">Day 09</a></li>
-                                    <li><a href="#">Day 10</a></li>
-                                    <li><a href="#">Day 11</a></li>
+                                {aocdays.map((d) => 
+                                    (<li><a href="#" hx-get={d.route} hx-target="#app-content">{d.text}</a></li>))}
                                 </ul>
                             </li>
                             {/* <li><a href="demo.html">Demo</a></li>	 */}

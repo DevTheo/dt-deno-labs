@@ -1,6 +1,8 @@
 import { Day01 } from "./aoc24/day01.tsx";
 import { HandlerFn, HttpMethodString, IRoute } from "../router.ts";
 import { App } from "./app.tsx";
+import { Day02 } from "./aoc24/day02.tsx";
+import { Day03 } from "./aoc24/day03.tsx";
 
 
 // deno-lint-ignore no-explicit-any
@@ -21,6 +23,12 @@ export type AppRouteItem = {
     handler: HandlerFn
 }
 
+export const aocdays = [
+    { text: "Day 01", route:"/aoc24/day01", ctl: Day01 },
+    { text: "Day 02", route:"/aoc24/day02", ctl: Day02 },
+    { text: "Day 03", route:"/aoc24/day03", ctl: Day03 },
+];
+
 const appmap = [
     {
         key:"/app/:pg", 
@@ -28,11 +36,8 @@ const appmap = [
         handler:((c: any) => c.html(App({ ...c.req.param()}))) 
     },
     // aoc24
-    {
-        key:"/aoc24/day01", 
-        // deno-lint-ignore no-explicit-any
-        handler:((c: any) => c.html(Day01())) 
-    }
+    // deno-lint-ignore no-explicit-any
+    ...(aocdays.map((i) => ({ key: i.route, handler:((c: any) => c.html(i.ctl())) })) as AppRouteItem[]),
 ] as AppRouteItem[];
     
 export const approutes = appmap.map((info) => ({
