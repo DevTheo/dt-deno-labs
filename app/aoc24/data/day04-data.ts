@@ -1,0 +1,14 @@
+
+export const testData1 = `
+MMMSXXMASM
+MSAMXMSMSA
+AMXSXMAAMM
+MSAMASMSMX
+XMASAMXAMM
+XXAMMXXAMA
+SMSMSASXSS
+SAXAMASAAA
+MAMMMXMMMM
+MXMXAXMASX`;
+
+export const realData = Deno.readTextFileSync('app/aoc24/data/day04.txt');

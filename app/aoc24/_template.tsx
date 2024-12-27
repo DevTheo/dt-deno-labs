@@ -16,3 +16,11 @@ export function Day00() {
             realAnswer2={realAnswer2} />
     );
 }
+
+// const solvePuzzle1 = (useTestData: boolean) => {
+//     const data = useTestData ? testData1 : realData;
+// }
+
+// const solvePuzzle2 = (useTestData: boolean) => {
+//     const data = useTestData ? testData1 : realData;
+// }
