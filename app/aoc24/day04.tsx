@@ -5,8 +5,8 @@ import { testData1, realData } from "./data/day04-data.ts";
 export function Day04() {
     const testAnswer1: string = solvePuzzle1(true);
     const realAnswer1: string = solvePuzzle1(false);
-    const testAnswer2: string = "0"; //solvePuzzle2(true);
-    const realAnswer2: string = "0"; //solvePuzzle2(false);
+    const testAnswer2: string = solvePuzzle2(true);
+    const realAnswer2: string = solvePuzzle2(false);
 
     return (
         <AocUi 
@@ -19,7 +19,7 @@ export function Day04() {
 }
 
 const solvePuzzle1 = (useTestData: boolean) => {
-    const log = getlogger(useTestData);
+    //const log = getlogger(useTestData);
     const data = useTestData ? testData1 : realData;
     const searchString = "XMAS".split('');
     const searchLength = searchString.length;
@@ -42,7 +42,7 @@ const solvePuzzle1 = (useTestData: boolean) => {
                 input[linenum][colnum + 2] === searchString[2] && 
                 input[linenum][colnum + 3] === searchString[3]) {
                     count ++;
-                    log(`${linenum} ${colnum} l2r`);
+                    //log(`${linenum} ${colnum} l2r`);
             }
             // search right to right
             if (    
@@ -52,7 +52,7 @@ const solvePuzzle1 = (useTestData: boolean) => {
                 input[linenum][colnum - 2] === searchString[2] && 
                 input[linenum][colnum - 3] === searchString[3]) {
                     count ++;
-                    log(`${linenum} ${colnum} r2l`);
+                    //log(`${linenum} ${colnum} r2l`);
             }
             // search up to down
             if (    
@@ -62,7 +62,7 @@ const solvePuzzle1 = (useTestData: boolean) => {
                 input[linenum + 2][colnum] === searchString[2] && 
                 input[linenum + 3][colnum] === searchString[3]) {
                     count ++;
-                    log(`${linenum} ${colnum} u2d`);
+                    //log(`${linenum} ${colnum} u2d`);
             }
 
             // search down to up
@@ -73,7 +73,7 @@ const solvePuzzle1 = (useTestData: boolean) => {
                 input[linenum - 2][colnum] === searchString[2] && 
                 input[linenum - 3][colnum] === searchString[3]) {
                     count ++;
-                    log(`${linenum} ${colnum} d2u`);
+                    //log(`${linenum} ${colnum} d2u`);
             }
             // diagonal dnright
             if ( 
@@ -83,7 +83,7 @@ const solvePuzzle1 = (useTestData: boolean) => {
                 input[linenum + 2][colnum + 2] === searchString[2] && 
                 input[linenum + 3][colnum + 3] === searchString[3]) {
                     count ++;
-                    log(`${linenum} ${colnum} 2dr`);
+                    //log(`${linenum} ${colnum} 2dr`);
             }
             // diagonal upright
             if ( 
@@ -93,7 +93,7 @@ const solvePuzzle1 = (useTestData: boolean) => {
                 input[linenum - 2][colnum + 2] === searchString[2] && 
                 input[linenum - 3][colnum + 3] === searchString[3]) {
                     count ++;
-                    log(`${linenum} ${colnum} 2ur`);
+                    //log(`${linenum} ${colnum} 2ur`);
             }
         
             // diagonal dnleft
@@ -104,7 +104,7 @@ const solvePuzzle1 = (useTestData: boolean) => {
                 input[linenum + 2][colnum - 2] === searchString[2] && 
                 input[linenum + 3][colnum - 3] === searchString[3]) {
                     count ++;
-                    log(`${linenum} ${colnum} 2dl`);
+                    //log(`${linenum} ${colnum} 2dl`);
             }
             // diagonal upleft
             if ( 
@@ -114,13 +114,39 @@ const solvePuzzle1 = (useTestData: boolean) => {
                 input[linenum - 2][colnum - 2] === searchString[2] && 
                 input[linenum - 3][colnum - 3] === searchString[3]) {
                     count ++;
-                    log(`${linenum} ${colnum} 2ul`);
+                    //log(`${linenum} ${colnum} 2ul`);
             }
         }
     }
 
     return count.toString();
 }
+
+const solvePuzzle2 = (useTestData: boolean) => {
+    //const log = getlogger(useTestData);
+    const data = useTestData ? testData1 : realData;
+    let count = 0;
+    const input = data.trim().split("\n").map(ln => ln.trim().split(''));
+    const lineLength = input.length;
+    for (let linenum = 1; linenum < lineLength-1; linenum++) {
+        const colcount = input[linenum].length;
+        for(let colnum = 1; colnum < colcount-1; colnum++) {
+            if(input[linenum][colnum] === "A") {
+                const topLeft = input[linenum-1][colnum-1];
+                const bottomLeft = input[linenum+1][colnum-1];
+                const topRight = input[linenum-1][colnum+1];
+                const bottomRight = input[linenum+1][colnum+1];
+                const masTL2BR = topLeft === "M" && bottomRight === "S"; 
+                const masBR2TL = bottomRight === "M" && topLeft === "S"; 
+                const masTR2BL = topRight === "M" && bottomLeft === "S"; 
+                const masBL2TR = bottomLeft === "M" && topRight === "S"; 
+                
+                count += ((masTL2BR || masBR2TL) && (masTR2BL || masBL2TR)) ? 1 : 0;
+            }
+        }
+    }
+    return count.toString();
+};
 
 /*
 The Elf looks quizzically at you. Did you misunderstand the assignment?

@@ -4,6 +4,7 @@ import { App } from "./app.tsx";
 import { Day02 } from "./aoc24/day02.tsx";
 import { Day03 } from "./aoc24/day03.tsx";
 import { Day04 } from "./aoc24/day04.tsx";
+import { Day05 } from "./aoc24/day05.tsx";
 
 
 // deno-lint-ignore no-explicit-any
@@ -21,6 +22,7 @@ export const aocdays = [
     { text: "Day 02", route:"/aoc24/day02", ctl: Day02 },
     { text: "Day 03", route:"/aoc24/day03", ctl: Day03 },
     { text: "Day 04", route:"/aoc24/day04", ctl: Day04 },
+    { text: "Day 05", route:"/aoc24/day05", ctl: Day05 },
 ];
 
 const appmap = [
